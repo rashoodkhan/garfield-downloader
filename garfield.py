@@ -14,6 +14,11 @@ def daterange(start,end):
     for x in range(int ((end - start).days)):
         yield start + timedelta(x)
 
+#Create the Directory, if not already existing
+dir = "./garfield/"
+if not os.path.exists(dir):
+    os.makedirs(dir)
+    
 start_date = date.today()
     
 #Garfield Started on 19th June, 1978
@@ -28,9 +33,6 @@ for single_day in daterange(start_date,end_date):
         if e.code == 404:
             continue
     print ("Downloading :: " + link)
-    dir = "./garfield/"
-    if not os.path.exists(dir):
-        os.makedirs(dir)
     
     save_file = open(dir+str(single_day)+".jpg","w"+'b')
     save_file.write(f.read())
