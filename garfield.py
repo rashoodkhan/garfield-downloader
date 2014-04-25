@@ -27,16 +27,20 @@ end_date = date.today()
 
 for single_day in daterange(start_date,end_date):
     link = "http://garfield.com/uploads/strips/" + str(single_day) + ".jpg"
-    try:
-        f = urllib2.urlopen(link)
-    except urllib2.URLError,e:
-        if e.code == 404:
-            continue
-    print ("Downloading :: " + link)
+
+    #checks whether the files already exist or not  
+    filename = dir+str(single_day)+".jpg"
+    if not os.path.exists(filename): 
+        try:
+            f = urllib2.urlopen(link)
+        except urllib2.URLError,e:
+            if e.code == 404:
+                continue
+        print ("Downloading :: " + link)
     
-    save_file = open(dir+str(single_day)+".jpg","w"+'b')
-    save_file.write(f.read())
-    save_file.close()
+        save_file = open(dir+str(single_day)+".jpg","w"+'b')
+        save_file.write(f.read())
+        save_file.close()
 
 print "Garfield Comics has been downloaded"
 print "Thanks for using! :)"
