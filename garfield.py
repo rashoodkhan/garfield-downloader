@@ -26,10 +26,11 @@ start_date = start_date.replace(year=1978,month=6,day=19)
 end_date = date.today()
 
 for single_day in daterange(start_date,end_date):
-    link = "http://garfield.com/uploads/strips/" + str(single_day) + ".jpg"
+    link = "https://d1ejxu6vysztl5.cloudfront.net/comics/garfield/" + (str(single_day)[:4]) + "/" + str(single_day) + ".gif"
+    print(single_day)
 
     #checks whether the files already exist or not  
-    filename = dir+str(single_day)+".jpg"
+    filename = dir+str(single_day)+".gif"
     if not os.path.exists(filename): 
         try:
             f = urllib2.urlopen(link)
@@ -38,7 +39,7 @@ for single_day in daterange(start_date,end_date):
                 continue
         print ("Downloading :: " + link)
     
-        save_file = open(dir+str(single_day)+".jpg","w"+'b')
+        save_file = open(dir+str(single_day)+".gif","w"+'b')
         save_file.write(f.read())
         save_file.close()
 
